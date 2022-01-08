@@ -2,7 +2,7 @@
 
 
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -29,8 +29,7 @@
               <div class="form-group" style="display:inline;">
                 <div class="input-group">
                   <input class="form-control input-lg" name="greeting">
-            
-                  
+
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary btn-block">Set Greeting</button>
                   </span>
@@ -58,7 +57,7 @@
 
       // Set Contract Abi
       var contractAbi = 
-	  
+
 	  [
 	{
 		"constant": true,
@@ -116,33 +115,6 @@
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-
-//newly added store number
-
-{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "num",
-				"type": "unit256"
-			}
-		],
-		"name": "store",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	}
-
-//end newly added store number
-
 ]
 
 ; // Add Your Contract ABI here!!!
@@ -170,15 +142,12 @@
       $('form').on('submit', function(event) {
         event.preventDefault();
         greeting = $('input').val();
-        storenumber=777;
         console.log(greeting)
-        console.log(storenumber)
         web3.eth.getAccounts().then(function(accounts) {
           contract.methods.setGreeting(greeting).send({ from: accounts[0] });
-          contract.methods.store(storenumber).send({ from: accounts[0] });
         });
       });
 
     </script>
-  
+
 </body></html>
