@@ -1,19 +1,153 @@
-<html>
-
-<h1>group buy of digital product</h1>
+<!DOCTYPE html>
 
 
-<h2>item to buy</h2>
-<h2>status of buy (completed or not)</h2>
-<h2>login to metamask to see your digital asset</h2>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Greeter</title>
 
-<h3>max participants</h3>
+    <!-- Bootstrap -->
+    <link href="./Greeter_files/bootstrap.min.css" rel="stylesheet">
 
-<h3>number of current participants that have paid</h3>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container" style="width: 600px;">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h1 id="greeting">dsasdasddsa</h1>
+          <h1 id="retrieve">565</h1>
+          <div id="content">
+            <form role="form">
+              <div class="form-group" style="display:inline;">
+                <div class="input-group">
+                  <input class="form-control input-lg" name="greeting">
+                  
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary btn-block">Set Greeting</button>
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<h3>cost to participate</h3>
+    <!-- JQuery -->
+    <script src="./Greeter_files/jquery.min.js.download"></script>
+    <!-- Bootstrap -->
+    <script src="./Greeter_files/bootstrap.min.js.download"></script>
+    <!-- Web3.js -->
+    <script src="./Greeter_files/web3.min.js.download"></script>
+    <script>
+      // Initialize Web3
+      if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+      } else {
+        web3 = new Web3(new Web3.providers.HttpProvider('https://data-seed-prebsc-1-s1.binance.org:8545'));
+      }
+
+      // Set Contract Abi
+      var contractAbi = 
+	  
+	  [
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "greet",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
 
 
-<h3>list of current participents</h3>
+  {
+		"constant": true,
+		"inputs": [],
+		"name": "retrieve",
+		"outputs": [
+			{
+				"internalType": "int",
+				"name": "",
+				"type": "int"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
 
-</html>
+
+
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_greeting",
+				"type": "string"
+			}
+		],
+		"name": "setGreeting",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+
+; // Add Your Contract ABI here!!!
+
+      // Set Contract Address
+      var contractAddress = '0xD3d3Ab06015dc12E32DAAEDeF093148aD6e152d4'; // Add Your Contract address here!!!
+
+      // Set the Contract
+      var contract = new web3.eth.Contract(contractAbi, contractAddress);
+
+      // Display the Greeting
+      contract.methods.greet().call(function(err, result) {
+        console.log(err, result)
+        $('#greeting').html(result);
+      });
+
+      contract.methods.retrieve().call(function(err, result) {
+        console.log(err, result)
+        $('#retrieve').html(result);
+      });
+
+
+
+      // Change the Greeting
+      $('form').on('submit', function(event) {
+        event.preventDefault();
+        greeting = $('input').val();
+        console.log(greeting)
+        web3.eth.getAccounts().then(function(accounts) {
+          contract.methods.setGreeting(greeting).send({ from: accounts[0] });
+        });
+      });
+
+    </script>
+  
+</body></html>
