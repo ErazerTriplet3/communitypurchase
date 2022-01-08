@@ -29,6 +29,7 @@
               <div class="form-group" style="display:inline;">
                 <div class="input-group">
                   <input class="form-control input-lg" name="greeting">
+                  <input class="form-control input-lg" name="storenumber">
                   
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary btn-block">Set Greeting</button>
@@ -115,6 +116,33 @@
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
+
+//newly added store number
+
+{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "num",
+				"type": "unit256"
+			}
+		],
+		"name": "store",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+
+//end newly added store number
+
 ]
 
 ; // Add Your Contract ABI here!!!
@@ -142,9 +170,12 @@
       $('form').on('submit', function(event) {
         event.preventDefault();
         greeting = $('input').val();
+        storenumber=777;
         console.log(greeting)
+        console.log(storenumber)
         web3.eth.getAccounts().then(function(accounts) {
           contract.methods.setGreeting(greeting).send({ from: accounts[0] });
+          contract.methods.store(storenumber).send({ from: accounts[0] });
         });
       });
 
